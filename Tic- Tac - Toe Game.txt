@@ -76,10 +76,10 @@ int main()
 	switch (x)
 	{
 	case 1:
-		for (int k = 0; k < 4; k++) //loops five times because aftef five turns, it will be no where to play again.
+		for (int k = 0; k < 4; k++) //loops five times because after five turns, it will be no where to play again.
 							// it is the case of the draw التعادل. 
 		{
-			//player.1 code//
+			//PLAYER.1 CODE//
 			cout << "Player.1 : Your turn:";
 			cin >> p1;
 			while (p1 <= 0 || p1 > 9) //check if he input a number out of the range.
@@ -102,9 +102,9 @@ int main()
 				return 0;
 			}
 
-			//-------------------------------------------------//
+			/*-------------------------------------------------*/
 
-			 //player.2  code//
+			 //PLAYER.2 CODE//
 			cout << "Player.2: Your turn:";
 			cin >> p2;
 			while (p2 <= 0 || p2 > 9)
@@ -158,10 +158,10 @@ int main()
 
 			cout << "Computer's turn:";
 			srand(time(NULL));
-			p2 = (rand() % (9 - 1 + 1)) + 1; //function rand() to choose a number between 1 and 9 to play in the board.
+			p2 = (rand() % (9 - 1 + 1)) + 1; //function srand() to choose a number between 1 and 9 to play in the board.
 
 			while (XO[0][p2 - 1] == "|   X \t" || XO[0][p2 - 1] == "|   O \t")// the second condition because
-													   //computer may be generate the same random number twice.
+											 //computer may be generate the same random number twice.
 			{
 				p2 = (rand() % (9 - 1 + 1)) + 1;
 			}
