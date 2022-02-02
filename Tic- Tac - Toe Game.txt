@@ -1,0 +1,183 @@
+#include <iostream>
+#include<string.h>
+using namespace std;
+
+string XO[3][3];
+
+bool isPlayer1Win()
+{
+	if ((XO[0][0] == "|   X \t" && XO[0][1] == "|   X \t" && XO[0][2] == "|   X \t") ||
+		(XO[1][0] == "|   X \t" && XO[1][1] == "|   X \t" && XO[1][2] == "|   X \t") ||
+		(XO[2][0] == "|   X \t" && XO[2][1] == "|   X \t" && XO[2][2] == "|   X \t") ||
+
+		(XO[0][0] == "|   X \t" && XO[1][0] == "|   X \t" && XO[2][0] == "|   X \t") ||
+		(XO[0][1] == "|   X \t" && XO[1][1] == "|   X \t" && XO[2][1] == "|   X \t") ||
+		(XO[0][2] == "|   X \t" && XO[1][2] == "|   X \t" && XO[2][2] == "|   X \t") ||
+
+		(XO[0][0] == "|   X \t" && XO[1][1] == "|   X \t" && XO[2][2] == "|   X \t") ||
+		(XO[2][0] == "|   X \t" && XO[1][1] == "|   X \t" && XO[0][2] == "|   X \t"))
+	{
+		return true;
+	}
+	else
+		return false;
+}
+bool isPlayer2Win()
+{
+	if ((XO[0][0] == "|   O \t" && XO[0][1] == "|   O \t" && XO[0][2] == "|   O \t") ||
+		(XO[1][0] == "|   O \t" && XO[1][1] == "|   O \t" && XO[1][2] == "|   O \t") ||
+		(XO[2][0] == "|   O \t" && XO[2][1] == "|   O \t" && XO[2][2] == "|   O \t") ||
+
+		(XO[0][0] == "|   O \t" && XO[1][0] == "|   O \t" && XO[2][0] == "|   O \t") ||
+		(XO[0][1] == "|   O \t" && XO[1][1] == "|   O \t" && XO[2][1] == "|   O \t") ||
+		(XO[0][2] == "|   O \t" && XO[1][2] == "|   O \t" && XO[2][2] == "|   O \t") ||
+
+		(XO[0][0] == "|   O \t" && XO[1][1] == "|   O \t" && XO[2][2] == "|   O \t") ||
+		(XO[2][0] == "|   O \t" && XO[1][1] == "|   O \t" && XO[0][2] == "|   O \t"))
+	{
+		return 1;
+	}
+	else
+		return false;
+}
+void drawBoard()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cout << XO[i][j];
+		}
+		cout << "|" << "\n\n";
+	}
+}
+void createBoard()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			XO[i][j] = "|\t";
+		}
+	}
+}
+
+int main()
+{
+	int p1 = -1, p2 = -1;
+	int x = 0;
+
+	cout << "Game Started... \nChoose the play mode:\n";
+	cout << "1- Play with a friend\n2- Play with Computer\n";
+	cin >> x;
+	createBoard();
+	drawBoard();
+
+	switch (x)
+	{
+	case 1:
+		for (int k = 0; k < 4; k++) //loops five times because aftef five turns, it will be no where to play again.
+							// it is the case of the draw التعادل. 
+		{
+			//player.1 code//
+			cout << "Player.1 : Your turn:";
+			cin >> p1;
+			while (p1 <= 0 || p1 > 9) //check if he input a number out of the range.
+			{
+				cout << "invalid place\n";
+				cin >> p1;
+			}
+			while (XO[0][p1 - 1] == "|   O \t")//check if he input in a place that Player.2 already played in.
+			{
+				cout << "Player.2 is already played here, choose another place.\n";
+				cin >> p1;
+			}
+
+			XO[0][p1 - 1] = "|   X \t";
+			cout << "\n";
+			drawBoard();
+			if (isPlayer1Win())
+			{
+				cout << "Player.1 is the Winner.\n";
+				return 0;
+			}
+
+			//-------------------------------------------------//
+
+			 //player.2  code//
+			cout << "Player.2: Your turn:";
+			cin >> p2;
+			while (p2 <= 0 || p2 > 9)
+			{
+				cout << "invalid place, please enter a number between 1 and 9\n";
+				cin >> p2;
+			}
+			while (XO[0][p2 - 1] == "|   X \t")
+			{
+				cout << "Player.1 is already played here, choose another place.\n";
+				cin >> p2;
+			}
+
+			XO[0][p2 - 1] = "|   O \t";
+
+			cout << "\n";
+			drawBoard();
+			if (isPlayer2Win())
+			{
+				cout << "Player.2 is the Winner.\n";
+				return 0;
+			}
+		}
+		cout << "Game is finished with DRAW...";
+		break;
+
+	case 2:
+		for (int m = 0; m < 4; m++)
+		{
+			cout << "Player.1 : Your turn:";
+			cin >> p1;
+			while (p1 <= 0 || p1 > 9) //check if he input a number out of the range.
+			{
+				cout << "invalid place\n";
+				cin >> p1;
+			}
+			while (XO[0][p1 - 1] == "|   O \t")//check if he input in a place that Bassant already played in.
+			{
+				cout << "Player.2 is already played here, choose another place.\n";
+				cin >> p1;
+			}
+
+			XO[0][p1 - 1] = "|   X \t";
+			cout << "\n";
+			drawBoard();
+			if (isPlayer1Win())
+			{
+				cout << "Player.1 is the Winner.\n";
+				return 0;
+			}
+
+			cout << "Computer's turn:";
+			srand(time(NULL));
+			p2 = (rand() % (9 - 1 + 1)) + 1; //function rand() to choose a number between 1 and 9 to play in the board.
+
+			while (XO[0][p2 - 1] == "|   X \t" || XO[0][p2 - 1] == "|   O \t")// the second condition because
+													   //computer may be generate the same random number twice.
+			{
+				p2 = (rand() % (9 - 1 + 1)) + 1;
+			}
+
+			XO[0][p2 - 1] = "|   O \t";
+			cout << "\n";
+			drawBoard();
+			if (isPlayer2Win())
+			{
+				cout << "Computer is the Winner.\n";
+				return 0;
+			}
+		}
+		cout << "Game is finished with DRAW...";
+		break;
+	}
+}
+
+
